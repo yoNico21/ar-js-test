@@ -22,14 +22,12 @@ function main() {
   const loader = new GLTFLoader();
   loader.load("/glb_files/monkey.glb", function (glb) {
     console.log(glb);
-    const root = glb.scene;
-    arjs.add(root);
+    const object = glb.scene;
+    arjs.add(object, 51.9829333, 5.9108212);
   });
-
-  //const monkey = loader.load("/glb_files/monkey.glb");
   /* ------------------- */
 
-  //arjs.add(monkey.scene, 51.9829333, 5.9108212);
+  //arjs.add(monkey.scene);
 
   // Create the device orientation tracker
   const deviceOrientationControls = new THREEx.DeviceOrientationControls(
