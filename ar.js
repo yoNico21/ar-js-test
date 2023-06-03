@@ -37,7 +37,7 @@ function main() {
   //arjs.add(monkey.scene, 51.9829333, 5.9108212);
 
   // Create the device orientation tracker
-  const deviceOrientationControls = new THREEx.deviceOrientationControls(
+  const deviceOrientationControls = new THREEx.DeviceOrientationControls(
     camera
   );
 
