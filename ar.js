@@ -13,7 +13,7 @@ function main() {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
     90,
-    ratio.width / ratio.height,
+    ratio.height / ratio.width,
     0.1,
     10000
   );
@@ -36,6 +36,11 @@ function main() {
 
   //arjs.add(monkey.scene, 51.9829333, 5.9108212);
 
+  // Create the device orientation tracker
+  const deviceOrientationControls = new THREEx.deviceOrientationControls(
+    camera
+  );
+
   // Start the GPS
   arjs.startGps();
 
@@ -47,10 +52,14 @@ function main() {
       canvas.height != canvas.clientHeight
     ) {
       renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-      const aspect = canvas.clientWidth / canvas.clientHeight;
+      const aspect = canvas.clientHeight / canvas.clientWidth;
       camera.aspect = aspect;
       camera.updateProjectionMatrix();
     }
+
+    // Update the scene using the latest sensor readings
+    deviceOrientationControls.update();
+
     cam.update();
     renderer.render(scene, camera);
     requestAnimationFrame(render);
