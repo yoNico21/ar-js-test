@@ -17,17 +17,17 @@ function main() {
   const arjs = new THREEx.LocationBased(scene, camera);
   const cam = new THREEx.WebcamRenderer(renderer);
 
-  /* put my objects here */
-
   const loader = new GLTFLoader();
-  loader.load("/glb_files/monkey.glb", function (glb) {
-    console.log(glb);
-    const object = glb.scene;
-    arjs.add(object, 51.9829333, 5.9108212);
-  });
-  /* ------------------- */
 
-  //arjs.add(monkey.scene);
+  // Load in objects
+  const objects = [{ fileName: "monkey", lon: 51.9829333, lat: 5.9108212 }];
+
+  objects.forEach((object) => {
+    loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
+      console.log(glb);
+      arjs.add(glb.scene, object.lon, object.lat);
+    });
+  });
 
   // Create the device orientation tracker
   const deviceOrientationControls = new THREEx.DeviceOrientationControls(
