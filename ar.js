@@ -11,12 +11,7 @@ function main() {
   const canvas = document.getElementById("canvas");
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(
-    90,
-    ratio.height / ratio.width,
-    0.1,
-    10000
-  );
+  const camera = new THREE.PerspectiveCamera(90, 1.33, 0.1, 10000);
   const renderer = new THREE.WebGLRenderer({ canvas: canvas });
 
   const arjs = new THREEx.LocationBased(scene, camera);
@@ -52,7 +47,7 @@ function main() {
       canvas.height != canvas.clientHeight
     ) {
       renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-      const aspect = canvas.clientHeight / canvas.clientWidth;
+      const aspect = canvas.clientWidth / canvas.clientHeight;
       camera.aspect = aspect;
       camera.updateProjectionMatrix();
     }
