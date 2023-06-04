@@ -26,8 +26,6 @@ function main() {
     let envmap = envmaploader.fromCubemap(hdrmap);
     scene.environment = envmap;
 
-    render();
-
     // Load in objects
     const objects = [
       { fileName: "creature_1", lat: 5.9108008, lon: 51.9829402, scale: 1.0 },
@@ -41,6 +39,8 @@ function main() {
         arjs.add(glb.scene, object.lat, object.lon);
       });
     });
+
+    requestAnimationFrame(render);
   });
 
   // Create the device orientation tracker
