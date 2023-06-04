@@ -16,7 +16,7 @@ function main() {
   // assigning HDR
   const HDRLoader = new RGBELoader();
   HDRLoader.load("/hdr/noon_grass_8k.hdr", function (texture) {
-    scene.environment = texture;
+    arjs.environment = texture;
 
     // Load in objects
     const objects = [
