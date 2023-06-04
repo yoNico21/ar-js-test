@@ -26,7 +26,7 @@ function main() {
     let envmap = envmaploader.fromCubemap(hdrmap);
     scene.environment = envmap;
 
-    requestAnimationFrame(render);
+    renderer.render(scene, camera);
 
     // Load in objects
     const objects = [
@@ -50,6 +50,8 @@ function main() {
 
   // Start the GPS
   arjs.startGps();
+
+  requestAnimationFrame(render);
 
   function render() {
     if (
