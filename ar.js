@@ -27,19 +27,19 @@ function main() {
     scene.environment = envmap;
 
     renderer.render(scene, camera);
+  });
 
-    // Load in objects
-    const objects = [
-      { fileName: "creature_1", lat: 5.9108008, lon: 51.9829402, scale: 1.0 },
-    ];
+  // Load in objects
+  const objects = [
+    { fileName: "creature_1", lat: 5.9108008, lon: 51.9829402, scale: 1.0 },
+  ];
 
-    const loader = new GLTFLoader();
-    objects.forEach((object) => {
-      loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
-        const scale = object.scale;
-        glb.scene.scale.setScalar(scale);
-        arjs.add(glb.scene, object.lat, object.lon);
-      });
+  const loader = new GLTFLoader();
+  objects.forEach((object) => {
+    loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
+      const scale = object.scale;
+      glb.scene.scale.setScalar(scale);
+      arjs.add(glb.scene, object.lat, object.lon);
     });
   });
 
