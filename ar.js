@@ -39,8 +39,6 @@ function main() {
         arjs.add(glb.scene, object.lat, object.lon);
       });
     });
-
-    requestAnimationFrame(render);
   });
 
   // Create the device orientation tracker
@@ -51,7 +49,7 @@ function main() {
   // Start the GPS
   arjs.startGps();
 
-  // requestAnimationFrame(render);
+  requestAnimationFrame(render);
 
   function render() {
     if (
