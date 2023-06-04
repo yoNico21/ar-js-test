@@ -10,9 +10,9 @@ function main() {
   const camera = new THREE.PerspectiveCamera(90, 1.33, 0.1, 10000);
   const renderer = new THREE.WebGLRenderer({ canvas: canvas });
 
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1;
+  scene.outputColorSpace = THREE.SRGBColorSpace;
+  scene.toneMapping = THREE.ACESFilmicToneMapping;
+  scene.toneMappingExposure = 1;
 
   const arjs = new THREEx.LocationBased(scene, camera);
   const cam = new THREEx.WebcamRenderer(renderer);
