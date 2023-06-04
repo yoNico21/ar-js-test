@@ -12,6 +12,7 @@ function main() {
 
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1;
 
   const arjs = new THREEx.LocationBased(scene, camera);
   const cam = new THREEx.WebcamRenderer(renderer);
@@ -21,10 +22,11 @@ function main() {
   // assigning HDR
   const HDRLoader = new RGBELoader();
   HDRLoader.load("/hdr/noon_grass_8k.hdr", function (hdrmap) {
-    //hdrmap.mapping = THREE.EquirectangularReflectionMapping;
-    //scene.environment = hdrmap;
+    hdrmap.mapping = THREE.EquirectangularReflectionMapping;
     let envmap = envmaploader.fromCubemap(hdrmap);
     scene.environment = envmap;
+
+    requestAnimationFrame(render);
 
     // Load in objects
     const objects = [
@@ -48,8 +50,6 @@ function main() {
 
   // Start the GPS
   arjs.startGps();
-
-  requestAnimationFrame(render);
 
   function render() {
     if (
