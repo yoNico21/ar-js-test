@@ -16,20 +16,21 @@ function main() {
   // assigning HDR
   const HDRLoader = new RGBELoader();
   HDRLoader.load("/hdr/noon_grass_8k.hdr", function (texture) {
+    texture.mapping = THREE.EquirectangularReflectionMapping;
     arjs.environment = texture;
+  });
 
-    // Load in objects
-    const objects = [
-      { fileName: "creature_1", lat: 5.9108008, lon: 51.9829402, scale: 1.0 },
-    ];
+  // Load in objects
+  const objects = [
+    { fileName: "creature_1", lat: 5.9108008, lon: 51.9829402, scale: 1.0 },
+  ];
 
-    const loader = new GLTFLoader();
-    objects.forEach((object) => {
-      loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
-        const scale = object.scale;
-        glb.scene.scale.setScalar(scale);
-        arjs.add(glb.scene, object.lat, object.lon);
-      });
+  const loader = new GLTFLoader();
+  objects.forEach((object) => {
+    loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
+      const scale = object.scale;
+      glb.scene.scale.setScalar(scale);
+      arjs.add(glb.scene, object.lat, object.lon);
     });
   });
 
@@ -40,10 +41,6 @@ function main() {
 
   // Start the GPS
   arjs.startGps();
-
-  // renderer.outputColorSpace = THREE.SRGBColorSpace;
-  // renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  // renderer.toneMappingExposure = 1.8;
 
   requestAnimationFrame(render);
 
