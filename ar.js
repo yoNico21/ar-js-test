@@ -20,7 +20,12 @@ function main() {
   const loader = new GLTFLoader();
 
   // Load in objects
-  const objects = [{ fileName: "monkey", lon: 51.9829333, lat: 5.9108212 }];
+  const objects = [
+    { fileName: "monkey", lon: 51.98348, lat: 5.906594 },
+    { fileName: "creature_1", lon: 51.983467, lan: 5.908757 },
+    { fileName: "monkey", lon: 51.9829284, lat: 5.9108081 },
+    { fileName: "creature_1", lon: 51.982974, lan: 5.90107615 },
+  ];
 
   objects.forEach((object) => {
     loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {

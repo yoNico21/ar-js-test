@@ -12,7 +12,7 @@
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "@ar-js-org/ar.js": "^3.4.2",
+    "@ar-js-org/ar.js": "^3.4.5",
     "destyle.css": "^4.0.0"
   },
   "main": "main.js",
