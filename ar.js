@@ -17,7 +17,7 @@ function main() {
   const HDRLoader = new RGBELoader();
   HDRLoader.load("/hdr/noon_grass_8k.hdr", function (texture) {
     texture.mapping = THREE.EquirectangularReflectionMapping;
-    arjs.environment = texture;
+    scene.environment = texture;
   });
 
   // Load in objects
