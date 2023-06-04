@@ -15,16 +15,22 @@ function main() {
 
   const loader = new GLTFLoader();
 
-  // Load in objects
-  const objects = [
-    { fileName: "creature_1", lat: 5.9108008, lon: 51.9829402, scale: 1.0 },
-  ];
+  // assigning HDR
+  const HDRLoader = new RGBELoader();
+  HDRLoader.load("/hdr/noon_grass_8k.hdr", function (texture) {
+    scene.environment = texture;
 
-  objects.forEach((object) => {
-    loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
-      const scale = object.scale;
-      glb.scene.scale.setScalar(scale);
-      arjs.add(glb.scene, object.lat, object.lon);
+    const objects = [
+      { fileName: "creature_1", lat: 5.9108008, lon: 51.9829402, scale: 1.0 },
+    ];
+
+    // Load in objects
+    objects.forEach((object) => {
+      loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
+        const scale = object.scale;
+        glb.scene.scale.setScalar(scale);
+        arjs.add(glb.scene, object.lat, object.lon);
+      });
     });
   });
 
@@ -39,11 +45,6 @@ function main() {
   // renderer.outputColorSpace = THREE.SRGBColorSpace;
   // renderer.toneMapping = THREE.ACESFilmicToneMapping;
   // renderer.toneMappingExposure = 1.8;
-
-  const HDRLoader = new RGBELoader();
-  HDRLoader.load("/hdr/noon_grass_8k.hdr", function (texture) {
-    scene.environment = texture;
-  });
 
   requestAnimationFrame(render);
 
