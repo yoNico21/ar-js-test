@@ -40,7 +40,7 @@ function main() {
       const scale = object.scale;
       glb.scene.scale.setScalar(scale);
       console.log(glb.scene.scale);
-      arjs.add(glb.scene, object.lon, object.lat);
+      arjs.add(glb.scene, object.lat, object.lon);
     });
   });
 
