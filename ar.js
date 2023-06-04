@@ -28,11 +28,6 @@ function main() {
     });
   });
 
-  const geom = new THREE.BoxGeometry(20, 20, 20);
-  const mtl = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-  const box = new THREE.Mesh(geom, mtl);
-  arjs.add(box, 51.9835303, 5.9090838);
-
   // Create the device orientation tracker
   const deviceOrientationControls = new THREEx.DeviceOrientationControls(
     camera
@@ -41,14 +36,13 @@ function main() {
   // Start the GPS
   arjs.startGps();
 
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.8;
+  // renderer.outputColorSpace = THREE.SRGBColorSpace;
+  // renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  // renderer.toneMappingExposure = 1.8;
 
   const HDRLoader = new RGBELoader();
   HDRLoader.load("/hdr/noon_grass_8k.hdr", function (texture) {
     scene.environment = texture;
-    // scene.background = texture;
   });
 
   requestAnimationFrame(render);
