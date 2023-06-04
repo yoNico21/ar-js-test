@@ -1,11 +1,7 @@
 import * as THREE from "three";
 import * as THREEx from "@ar-js-org/ar.js/three.js/build/ar-threex-location-only";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-
-let ratio = {
-  width: window.innerWidth,
-  height: window.innerHeight,
-};
+import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 
 function main() {
   const canvas = document.getElementById("canvas");
@@ -22,16 +18,6 @@ function main() {
   // Load in objects
   const objects = [
     { fileName: "creature_1", lat: 5.9108008, lon: 51.9829402, scale: 1.0 },
-    // { fileName: "creature_1", lat: 5.908757, lon: 51.983467, scale: 1.0 },
-    // { fileName: "creature_1", lat: 5.9107146, lon: 51.9833337, scale: 0.1 },
-    // { fileName: "creature_1", lat: 5.9105004, lon: 51.9833928, scale: 0.25 },
-    // { fileName: "creature_1", lat: 5.9101768, lon: 51.9834287, scale: 0.5 },
-    // { fileName: "creature_1", lat: 5.9097467, lon: 51.9834675, scale: 1.5 },
-    // { fileName: "creature_1", lat: 5.909287, lon: 51.9834917, scale: 2 },
-    // { fileName: "creature_1", lat: 5.908704, lon: 51.98331, scale: 2.5 },
-    // { fileName: "creature_1", lat: 5.9078798, lon: 51.9832918, scale: 5 },
-    // { fileName: "creature_1", lat: 5.9066457, lon: 51.9832602, scale: 10 },
-    // { fileName: "creature_1", lat: 5.9046317, lon: 51.9831811, scale: 20 },
   ];
 
   objects.forEach((object) => {
@@ -54,6 +40,16 @@ function main() {
 
   // Start the GPS
   arjs.startGps();
+
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.8;
+
+  const HDRLoader = new RGBELoader();
+  HDRLoader.load("/hdr/noon_grass_8k.hdr", function (texture) {
+    scene.environment = texture;
+    // scene.background = texture;
+  });
 
   requestAnimationFrame(render);
 
