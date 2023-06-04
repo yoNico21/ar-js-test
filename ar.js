@@ -13,18 +13,17 @@ function main() {
   const arjs = new THREEx.LocationBased(scene, camera);
   const cam = new THREEx.WebcamRenderer(renderer);
 
-  const loader = new GLTFLoader();
-
   // assigning HDR
   const HDRLoader = new RGBELoader();
   HDRLoader.load("/hdr/noon_grass_8k.hdr", function (texture) {
     scene.environment = texture;
 
+    // Load in objects
     const objects = [
       { fileName: "creature_1", lat: 5.9108008, lon: 51.9829402, scale: 1.0 },
     ];
 
-    // Load in objects
+    const loader = new GLTFLoader();
     objects.forEach((object) => {
       loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
         const scale = object.scale;
