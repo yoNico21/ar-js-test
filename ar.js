@@ -21,7 +21,7 @@ function main() {
 
   // Load in objects
   const objects = [
-    { fileName: "creature_1", lon: 51.983467, lat: 5.908757 },
+    { fileName: "creature_1", lon: 51.983467, lat: 5.908757, scale: 1.0 },
     { fileName: "creature_1", lon: 51.9833337, lat: 5.9107146, scale: 0.1 },
     { fileName: "creature_1", lon: 51.9833928, lat: 5.9105004, scale: 0.25 },
     { fileName: "creature_1", lon: 51.9834287, lat: 5.9101768, scale: 0.5 },
@@ -36,9 +36,10 @@ function main() {
   objects.forEach((object) => {
     loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
       console.log(glb);
-      if (objects.scale) {
-        glb.scale.setScalar(object.scale);
-      }
+      console.log(`set scale: ${object.scale}`);
+      const scale = object.scale;
+      glb.scene.scale.setScalar(scale);
+      console.log(glb.scene.scale);
       arjs.add(glb.scene, object.lon, object.lat);
     });
   });
