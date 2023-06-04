@@ -69,7 +69,7 @@ function main() {
 
     cam.update();
     renderer.render(scene, camera);
-    requestAnimationFrame(animate);
+    requestAnimationFrame(render);
   }
 }
 
