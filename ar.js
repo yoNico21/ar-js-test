@@ -10,27 +10,34 @@ function main() {
   const camera = new THREE.PerspectiveCamera(90, 1.33, 0.1, 10000);
   const renderer = new THREE.WebGLRenderer({ canvas: canvas });
 
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
   const arjs = new THREEx.LocationBased(scene, camera);
   const cam = new THREEx.WebcamRenderer(renderer);
 
+  let envmaploader = new THREE.PMREMGenerator(renderer);
+
   // assigning HDR
   const HDRLoader = new RGBELoader();
-  HDRLoader.load("/hdr/noon_grass_8k.hdr", function (texture) {
-    texture.mapping = THREE.EquirectangularReflectionMapping;
-    scene.environment = texture;
-  });
+  HDRLoader.load("/hdr/noon_grass_8k.hdr", function (hdrmap) {
+    //hdrmap.mapping = THREE.EquirectangularReflectionMapping;
+    //scene.environment = hdrmap;
+    let envmap = envmaploader.fromCubemap(hdrmap);
+    scene.environment = envmap;
 
-  // Load in objects
-  const objects = [
-    { fileName: "creature_1", lat: 5.9108008, lon: 51.9829402, scale: 1.0 },
-  ];
+    // Load in objects
+    const objects = [
+      { fileName: "creature_1", lat: 5.9108008, lon: 51.9829402, scale: 1.0 },
+    ];
 
-  const loader = new GLTFLoader();
-  objects.forEach((object) => {
-    loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
-      const scale = object.scale;
-      glb.scene.scale.setScalar(scale);
-      arjs.add(glb.scene, object.lat, object.lon);
+    const loader = new GLTFLoader();
+    objects.forEach((object) => {
+      loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
+        const scale = object.scale;
+        glb.scene.scale.setScalar(scale);
+        arjs.add(glb.scene, object.lat, object.lon);
+      });
     });
   });
 
