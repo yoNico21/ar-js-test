@@ -21,18 +21,32 @@ function main() {
 
   // Load in objects
   const objects = [
-    { fileName: "monkey", lon: 51.98348, lat: 5.906594 },
-    { fileName: "creature_1", lon: 51.983467, lan: 5.908757 },
-    { fileName: "monkey", lon: 51.9829284, lat: 5.9108081 },
-    { fileName: "creature_1", lon: 51.982974, lan: 5.90107615 },
+    { fileName: "creature_1", lon: 51.983467, lat: 5.908757 },
+    { fileName: "creature_1", lon: 51.9833337, lat: 5.9107146, scale: 0.1 },
+    { fileName: "creature_1", lon: 51.9833928, lat: 5.9105004, scale: 0.25 },
+    { fileName: "creature_1", lon: 51.9834287, lat: 5.9101768, scale: 0.5 },
+    { fileName: "creature_1", lon: 51.9834675, lat: 5.9097467, scale: 1.5 },
+    { fileName: "creature_1", lon: 51.9834917, lat: 5.909287, scale: 2 },
+    { fileName: "creature_1", lon: 51.98331, lat: 5.908704, scale: 2.5 },
+    { fileName: "creature_1", lon: 51.9832918, lat: 5.9078798, scale: 5 },
+    { fileName: "creature_1", lon: 51.9832602, lat: 5.9066457, scale: 10 },
+    { fileName: "creature_1", lon: 51.9831811, lat: 5.9046317, scale: 20 },
   ];
 
   objects.forEach((object) => {
     loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
       console.log(glb);
+      if (objects.scale) {
+        glb.scale.setScalar(object.scale);
+      }
       arjs.add(glb.scene, object.lon, object.lat);
     });
   });
+
+  const geom = new THREE.BoxGeometry(20, 20, 20);
+  const mtl = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+  const box = new THREE.Mesh(geom, mtl);
+  arjs.add(box, 51.9835303, 5.9090838);
 
   // Create the device orientation tracker
   const deviceOrientationControls = new THREEx.DeviceOrientationControls(
