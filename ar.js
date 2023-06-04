@@ -21,25 +21,23 @@ function main() {
 
   // Load in objects
   const objects = [
-    { fileName: "creature_1", lon: 51.983467, lat: 5.908757, scale: 1.0 },
-    { fileName: "creature_1", lon: 51.9833337, lat: 5.9107146, scale: 0.1 },
-    { fileName: "creature_1", lon: 51.9833928, lat: 5.9105004, scale: 0.25 },
-    { fileName: "creature_1", lon: 51.9834287, lat: 5.9101768, scale: 0.5 },
-    { fileName: "creature_1", lon: 51.9834675, lat: 5.9097467, scale: 1.5 },
-    { fileName: "creature_1", lon: 51.9834917, lat: 5.909287, scale: 2 },
-    { fileName: "creature_1", lon: 51.98331, lat: 5.908704, scale: 2.5 },
-    { fileName: "creature_1", lon: 51.9832918, lat: 5.9078798, scale: 5 },
-    { fileName: "creature_1", lon: 51.9832602, lat: 5.9066457, scale: 10 },
-    { fileName: "creature_1", lon: 51.9831811, lat: 5.9046317, scale: 20 },
+    { fileName: "creature_1", lat: 5.9108008, lon: 51.9829402, scale: 1.0 },
+    // { fileName: "creature_1", lat: 5.908757, lon: 51.983467, scale: 1.0 },
+    // { fileName: "creature_1", lat: 5.9107146, lon: 51.9833337, scale: 0.1 },
+    // { fileName: "creature_1", lat: 5.9105004, lon: 51.9833928, scale: 0.25 },
+    // { fileName: "creature_1", lat: 5.9101768, lon: 51.9834287, scale: 0.5 },
+    // { fileName: "creature_1", lat: 5.9097467, lon: 51.9834675, scale: 1.5 },
+    // { fileName: "creature_1", lat: 5.909287, lon: 51.9834917, scale: 2 },
+    // { fileName: "creature_1", lat: 5.908704, lon: 51.98331, scale: 2.5 },
+    // { fileName: "creature_1", lat: 5.9078798, lon: 51.9832918, scale: 5 },
+    // { fileName: "creature_1", lat: 5.9066457, lon: 51.9832602, scale: 10 },
+    // { fileName: "creature_1", lat: 5.9046317, lon: 51.9831811, scale: 20 },
   ];
 
   objects.forEach((object) => {
     loader.load(`/glb_files/${object.fileName}.glb`, function (glb) {
-      console.log(glb);
-      console.log(`set scale: ${object.scale}`);
       const scale = object.scale;
       glb.scene.scale.setScalar(scale);
-      console.log(glb.scene.scale);
       arjs.add(glb.scene, object.lat, object.lon);
     });
   });
